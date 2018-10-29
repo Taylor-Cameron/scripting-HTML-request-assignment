@@ -2,21 +2,20 @@ var http = require('http');
 
 function getAndPrintHTMLChunks () {
 
-  var requestOptions = {
-    host: 'sytantris.github.io',
-    path: '/http-examples/step1.html'
-  };
+    var requestOptions = {
+        host: 'sytantris.github.io',
+        path: '/http-examples/step1.html'
+    };
 
-  http.get(requestOptions, function(response) {
-    var dataChunk = '';
-    response.setEncoding('utf8');
-    response.on('data', function(data) {
-      console.log(dataChunk += data);
+    http.get(requestOptions, function(response) {
+        response.setEncoding('utf8');
+        response.on('data', function(data) {
+            console.log(data);
+        });
+        response.on('end', function() {
+            console.log('Response complete.');
+        });
     });
-    response.on('end', function() {
-      console.log('Response complete.');
-    });
-  });
 }
 
 getAndPrintHTMLChunks();
